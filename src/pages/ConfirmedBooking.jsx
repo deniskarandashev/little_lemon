@@ -9,8 +9,9 @@ function ConfirmedBooking() {
       <h1>Booking confirmed!</h1>
       {booking ? (
         <p>
-          Your table for {booking.guests} guest(s) is reserved on {booking.date}{" "}
-          at {booking.time} ({booking.occasion}).
+          Thank you, {booking.name}! Table {booking.table} is reserved on{" "}
+          {booking.date} at {booking.time}. A confirmation will be sent to{" "}
+          {booking.phone}.
         </p>
       ) : (
         <p>Your reservation has been confirmed.</p>

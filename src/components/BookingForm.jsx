@@ -1,11 +1,22 @@
 import { useState } from "react";
 
+// Tables available in the restaurant. Tables 1 and 6 are already booked,
+// mirroring the Figma reservation design.
+export const TABLES = [
+  { id: 1, booked: true },
+  { id: 2, booked: false },
+  { id: 3, booked: false },
+  { id: 4, booked: false },
+  { id: 5, booked: false },
+  { id: 6, booked: true },
+];
+
 // Today's date (YYYY-MM-DD) used to block reservations in the past.
 const today = () => new Date().toISOString().split("T")[0];
 
 // Pure validation so it can be unit-tested in isolation.
 // Returns an object with a message per invalid field (empty = valid).
-export function validateBooking({ date, time, guests, occasion }) {
+export function validateBooking({ date, time, name, phone, table }) {
   const errors = {};
 
   if (!date) {
@@ -18,15 +29,19 @@ export function validateBooking({ date, time, guests, occasion }) {
     errors.time = "Please choose a time.";
   }
 
-  const guestCount = Number(guests);
-  if (!guests) {
-    errors.guests = "Please enter the number of guests.";
-  } else if (Number.isNaN(guestCount) || guestCount < 1 || guestCount > 10) {
-    errors.guests = "Guests must be between 1 and 10.";
+  if (!name || !name.trim()) {
+    errors.name = "Please enter your name.";
   }
 
-  if (!occasion) {
-    errors.occasion = "Please select an occasion.";
+  const phoneDigits = (phone || "").replace(/\D/g, "");
+  if (!phone) {
+    errors.phone = "Please enter a phone number.";
+  } else if (phoneDigits.length < 7) {
+    errors.phone = "Please enter a valid phone number.";
+  }
+
+  if (!table) {
+    errors.table = "Please select an available table.";
   }
 
   return errors;
@@ -36,8 +51,9 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [form, setForm] = useState({
     date: "",
     time: "",
-    guests: "",
-    occasion: "",
+    name: "",
+    phone: "",
+    table: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -59,7 +75,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
     }
   };
 
-  // Helper: props linking an input to its error message for screen readers.
+  // Helper: props linking a control to its error message for screen readers.
   const errorProps = (field) =>
     errors[field]
       ? { "aria-invalid": true, "aria-describedby": `${field}-error` }
@@ -87,7 +103,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
       </div>
 
       <div className="field">
-        <label htmlFor="time">Choose time</label>
+        <label htmlFor="time">Select time</label>
         <select
           id="time"
           name="time"
@@ -111,49 +127,74 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
       </div>
 
       <div className="field">
-        <label htmlFor="guests">Number of guests</label>
+        <label htmlFor="name">Name</label>
         <input
-          type="number"
-          id="guests"
-          name="guests"
-          min="1"
-          max="10"
-          value={form.guests}
+          type="text"
+          id="name"
+          name="name"
+          value={form.name}
           onChange={handleChange}
           required
-          {...errorProps("guests")}
+          {...errorProps("name")}
         />
-        {errors.guests && (
-          <span id="guests-error" className="error" role="alert">
-            {errors.guests}
+        {errors.name && (
+          <span id="name-error" className="error" role="alert">
+            {errors.name}
           </span>
         )}
       </div>
 
       <div className="field">
-        <label htmlFor="occasion">Occasion</label>
-        <select
-          id="occasion"
-          name="occasion"
-          value={form.occasion}
+        <label htmlFor="phone">Phone number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={form.phone}
           onChange={handleChange}
           required
-          {...errorProps("occasion")}
-        >
-          <option value="">Select an occasion</option>
-          <option value="Birthday">Birthday</option>
-          <option value="Anniversary">Anniversary</option>
-          <option value="Other">Other</option>
-        </select>
-        {errors.occasion && (
-          <span id="occasion-error" className="error" role="alert">
-            {errors.occasion}
+          {...errorProps("phone")}
+        />
+        {errors.phone && (
+          <span id="phone-error" className="error" role="alert">
+            {errors.phone}
           </span>
         )}
       </div>
 
-      <button type="submit" aria-label="On Click confirm reservation">
-        Reserve
+      <fieldset
+        className="tables"
+        aria-describedby={errors.table ? "table-error" : undefined}
+      >
+        <legend>Select a table to continue:</legend>
+        <div className="table-grid">
+          {TABLES.map((t) => (
+            <label
+              key={t.id}
+              className={`table-option${t.booked ? " booked" : ""}`}
+            >
+              <input
+                type="radio"
+                name="table"
+                value={String(t.id)}
+                checked={form.table === String(t.id)}
+                onChange={handleChange}
+                disabled={t.booked}
+              />
+              <span>Table {t.id}</span>
+              {t.booked && <span className="badge">BOOKED</span>}
+            </label>
+          ))}
+        </div>
+        {errors.table && (
+          <span id="table-error" className="error" role="alert">
+            {errors.table}
+          </span>
+        )}
+      </fieldset>
+
+      <button type="submit" aria-label="Submit reservation">
+        Submit
       </button>
     </form>
   );

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Little Lemon logo">
+  <ellipse cx="24" cy="24" rx="18" ry="13" fill="#f4ce14" stroke="#495e57" stroke-width="2"/>
+  <path d="M8 24 Q24 14 40 24 Q24 34 8 24 Z" fill="#e9b800" opacity="0.5"/>
+  <circle cx="18" cy="21" r="2" fill="#fff" opacity="0.7"/>
+</svg>

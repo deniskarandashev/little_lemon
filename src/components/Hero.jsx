@@ -7,15 +7,23 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1>Little Lemon</h1>
-        <h2>Chicago</h2>
-        <p>
-          We are a family-owned Mediterranean restaurant, focused on
-          traditional recipes served with a modern twist.
-        </p>
-        <button type="button" onClick={() => navigate("/booking")}>
-          Reserve a table
-        </button>
+        <div className="hero-text">
+          <h1>Little Lemon</h1>
+          <h2>Chicago</h2>
+          <p>
+            We are a family-owned Mediterranean restaurant, focused on
+            traditional recipes served with a modern twist.
+          </p>
+          <button type="button" onClick={() => navigate("/booking")}>
+            Reserve a table
+          </button>
+        </div>
+        {/* Brand placeholder — replace with the exported Figma hero photo. */}
+        <img
+          className="hero-image"
+          src="/images/hero.jpg"
+          alt="Signature Mediterranean dish at Little Lemon"
+        />
       </div>
     </section>
   );

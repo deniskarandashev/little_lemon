@@ -1,6 +1,9 @@
 :root {
-  --primary: #495e57;
-  --accent: #f4ce14;
+  /* Little Lemon official style-guide palette */
+  --primary: #495e57; /* Primary green */
+  --accent: #f4ce14; /* Primary yellow */
+  --secondary: #ee9972; /* Secondary salmon */
+  --secondary-light: #fbdabb; /* Secondary peach */
   --highlight-dark: #333333;
   --highlight-light: #edefee;
   --error: #c1121f;
@@ -12,14 +15,32 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  /* Body copy uses Karla per the brand style guide. */
+  font-family: "Karla", system-ui, sans-serif;
   color: var(--highlight-dark);
+  background: #fff;
 }
 
 h1,
 h2,
 h3 {
-  font-family: Georgia, "Times New Roman", serif;
+  /* Display type uses Markazi Text per the brand style guide. */
+  font-family: "Markazi Text", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+}
+
+h1 {
+  font-size: 3.25rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.6rem;
 }
 
 a {
@@ -43,6 +64,14 @@ a {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
 }
 
 .nav-list {
@@ -79,15 +108,40 @@ section {
 .hero-content {
   max-width: 960px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hero h1 {
+  color: var(--accent);
 }
 
 .hero h2 {
   margin-top: 0;
-  color: var(--accent);
 }
 
 .hero button {
   margin-top: 1rem;
+}
+
+.hero-image {
+  width: 100%;
+  min-height: 180px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: var(--secondary-light);
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1.3fr 1fr;
+  }
+  .hero-image {
+    min-height: 260px;
+  }
 }
 
 /* ---------- Cards (specials / testimonials) ---------- */
@@ -102,8 +156,36 @@ section {
 
 .card {
   background: var(--highlight-light);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1rem;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+  border-radius: 16px;
+}
+
+@media (min-width: 768px) {
+  .about {
+    grid-template-columns: 1.3fr 1fr;
+  }
 }
 
 .price {
@@ -155,15 +237,68 @@ select[aria-invalid="true"] {
   font-size: 0.85rem;
 }
 
+/* ---------- Table selection ---------- */
+.tables {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tables legend {
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.table-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.table-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.table-option.booked {
+  background: var(--highlight-light);
+  color: #888;
+  cursor: not-allowed;
+}
+
+.table-option .badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--error);
+}
+
+@media (min-width: 480px) {
+  .table-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 button {
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.5rem;
+  font-family: "Karla", sans-serif;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--highlight-dark);
   background: var(--accent);
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   cursor: pointer;
+}
+
+button:hover {
+  background: var(--secondary-light);
 }
 
 .confirmation {
