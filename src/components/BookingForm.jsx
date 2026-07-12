@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-// Tables available in the restaurant. Tables 1 and 6 are already booked,
-// mirroring the Figma reservation design.
 export const TABLES = [
   { id: 1, booked: true },
   { id: 2, booked: false },
@@ -11,11 +9,8 @@ export const TABLES = [
   { id: 6, booked: true },
 ];
 
-// Today's date (YYYY-MM-DD) used to block reservations in the past.
 const today = () => new Date().toISOString().split("T")[0];
 
-// Pure validation so it can be unit-tested in isolation.
-// Returns an object with a message per invalid field (empty = valid).
 export function validateBooking({ date, time, name, phone, table }) {
   const errors = {};
 
@@ -60,7 +55,6 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Changing the date refreshes the available times via the reducer.
     if (name === "date") {
       dispatch({ type: "UPDATE_TIMES", date: value });
     }
@@ -75,7 +69,6 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
     }
   };
 
-  // Helper: props linking a control to its error message for screen readers.
   const errorProps = (field) =>
     errors[field]
       ? { "aria-invalid": true, "aria-describedby": `${field}-error` }

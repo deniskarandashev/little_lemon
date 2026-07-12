@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-// Site footer with contact details and quick links.
 function Footer() {
   return (
     <footer className="footer">

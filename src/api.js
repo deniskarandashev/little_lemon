@@ -1,7 +1,3 @@
-// Provided by Meta for the Little Lemon capstone. `fetchAPI` returns a
-// deterministic list of available times for a given date; `submitAPI`
-// simulates a successful booking submission.
-
 const seededRandom = function (seed) {
   const m = 2 ** 35 - 31;
   const a = 185852;

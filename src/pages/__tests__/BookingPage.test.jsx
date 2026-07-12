@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { initializeTimes, updateTimes } from "../BookingPage.jsx";
 
-// Tests for the available-times reducer logic (course-required).
 describe("Available times reducer", () => {
   it("initializeTimes returns a non-empty array of time slots", () => {
     const times = initializeTimes();

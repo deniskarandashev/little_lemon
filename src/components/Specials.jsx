@@ -1,4 +1,3 @@
-// This week's featured dishes.
 const SPECIALS = [
   {
     name: "Greek Salad",

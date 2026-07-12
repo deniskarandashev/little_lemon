@@ -1,4 +1,3 @@
-// "About" section describing the restaurant owners.
 function About() {
   return (
     <section className="about" aria-labelledby="about-heading">

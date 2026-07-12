@@ -1,13 +1,9 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 
-// Site header with logo and primary navigation.
 function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // "Menu" scrolls to the specials section on the home page (there is no
-  // separate menu route in the project scope). From other routes we navigate
-  // home first, then scroll once the section has rendered.
   const handleMenu = (event) => {
     event.preventDefault();
     const scroll = () =>

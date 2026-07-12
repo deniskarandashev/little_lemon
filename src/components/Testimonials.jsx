@@ -1,4 +1,3 @@
-// Customer testimonials.
 const REVIEWS = [
   { name: "Sarah", rating: "★★★★★", text: "Amazing food and cosy atmosphere!" },
   { name: "Mike", rating: "★★★★★", text: "The lemon dessert is unforgettable." },

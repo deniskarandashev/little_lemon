@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-// Landing hero with the primary "Reserve a table" call to action.
 function Hero() {
   const navigate = useNavigate();
 
@@ -18,7 +17,6 @@ function Hero() {
             Reserve a table
           </button>
         </div>
-        {/* Brand placeholder — replace with the exported Figma hero photo. */}
         <img
           className="hero-image"
           src="/images/hero.jpg"

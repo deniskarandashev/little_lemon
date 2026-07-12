@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BookingForm, { validateBooking, TABLES } from "../BookingForm.jsx";
 
-// A valid future booking used across the validation tests.
 const validBooking = {
   date: "2999-01-01",
   time: "18:00",
@@ -12,7 +11,6 @@ const validBooking = {
   table: "2",
 };
 
-// Unit tests for the pure validation logic (edge cases).
 describe("validateBooking", () => {
   it("returns no errors for valid input", () => {
     expect(validateBooking(validBooking)).toEqual({});
@@ -48,7 +46,6 @@ describe("validateBooking", () => {
   });
 });
 
-// Rendering / interaction tests for the form component.
 describe("BookingForm", () => {
   const setup = () => {
     const submitForm = vi.fn();

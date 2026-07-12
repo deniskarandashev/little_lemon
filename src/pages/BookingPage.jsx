@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import BookingForm from "../components/BookingForm.jsx";
 import { fetchAPI, submitAPI } from "../api.js";
 
-// Lazy initial available times for today's date.
 export function initializeTimes() {
   return fetchAPI(new Date());
 }
 
-// Reducer: recompute available times whenever the chosen date changes.
 export function updateTimes(state, action) {
   switch (action.type) {
     case "UPDATE_TIMES":
@@ -18,7 +16,6 @@ export function updateTimes(state, action) {
   }
 }
 
-// Booking page: owns the available-times state and the submit handler.
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(
     updateTimes,

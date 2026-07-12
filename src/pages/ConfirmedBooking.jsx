@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 
-// Confirmation page shown after a successful submitAPI call.
 function ConfirmedBooking() {
   const { state: booking } = useLocation();
 

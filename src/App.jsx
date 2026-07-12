@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage.jsx";
 import BookingPage from "./pages/BookingPage.jsx";
 import ConfirmedBooking from "./pages/ConfirmedBooking.jsx";
 
-// App shell: shared Header/Footer landmarks around the routed pages.
 function App() {
   return (
     <>
