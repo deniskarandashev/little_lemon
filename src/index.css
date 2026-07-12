@@ -1,6 +1,8 @@
 :root {
   --primary: #495e57;
   --accent: #f4ce14;
+  --highlight-dark: #333333;
+  --highlight-light: #edefee;
   --error: #c1121f;
 }
 
@@ -11,40 +13,118 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  color: #333;
+  color: var(--highlight-dark);
 }
 
-.app {
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Header / Nav ---------- */
+.header {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.header,
-.footer {
-  background: var(--primary);
-  color: #fff;
-  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 2px solid var(--highlight-light);
 }
 
 .logo {
-  color: var(--accent);
+  color: var(--primary);
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
 }
 
-.main {
-  flex: 1;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 1.5rem;
+.nav-list {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+.nav-list a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ---------- Layout ---------- */
+.main {
+  min-height: 60vh;
+}
+
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--primary);
+  color: #fff;
+  max-width: none;
+}
+
+.hero-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.hero button {
+  margin-top: 1rem;
+}
+
+/* ---------- Cards (specials / testimonials) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background: var(--highlight-light);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.price {
+  color: var(--error);
+  font-weight: 700;
+}
+
+.rating {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.reviewer {
+  font-weight: 700;
+}
+
+/* ---------- Booking form ---------- */
 .booking-form {
   display: grid;
   gap: 1rem;
+  max-width: 480px;
 }
 
 .field {
@@ -76,10 +156,10 @@ select[aria-invalid="true"] {
 }
 
 button {
-  padding: 0.75rem;
+  padding: 0.75rem 1.25rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--highlight-dark);
   background: var(--accent);
   border: none;
   border-radius: 8px;
@@ -87,13 +167,39 @@ button {
 }
 
 .confirmation {
-  padding: 1rem;
-  background: #eef3f1;
-  border-radius: 8px;
+  text-align: center;
 }
 
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--highlight-dark);
+  color: var(--highlight-light);
+  padding: 2rem 1.5rem;
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+}
+
+.footer .logo {
+  color: var(--accent);
+}
+
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+/* ---------- Responsive ---------- */
 @media (min-width: 768px) {
-  .main {
-    padding: 2.5rem;
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

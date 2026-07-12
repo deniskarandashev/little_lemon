@@ -1,19 +1,9 @@
 import { useState } from "react";
 
-// Available reservation time slots.
-export const AVAILABLE_TIMES = [
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
-  "22:00",
-];
-
 // Today's date (YYYY-MM-DD) used to block reservations in the past.
 const today = () => new Date().toISOString().split("T")[0];
 
-// Pure validation function so it can be unit-tested in isolation.
+// Pure validation so it can be unit-tested in isolation.
 // Returns an object with a message per invalid field (empty = valid).
 export function validateBooking({ date, time, guests, occasion }) {
   const errors = {};
@@ -42,7 +32,7 @@ export function validateBooking({ date, time, guests, occasion }) {
   return errors;
 }
 
-function BookingForm({ submitForm }) {
+function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [form, setForm] = useState({
     date: "",
     time: "",
@@ -54,6 +44,10 @@ function BookingForm({ submitForm }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    // Changing the date refreshes the available times via the reducer.
+    if (name === "date") {
+      dispatch({ type: "UPDATE_TIMES", date: value });
+    }
   };
 
   const handleSubmit = (event) => {
@@ -103,7 +97,7 @@ function BookingForm({ submitForm }) {
           {...errorProps("time")}
         >
           <option value="">Select a time</option>
-          {AVAILABLE_TIMES.map((slot) => (
+          {availableTimes.map((slot) => (
             <option key={slot} value={slot}>
               {slot}
             </option>
@@ -158,7 +152,7 @@ function BookingForm({ submitForm }) {
         )}
       </div>
 
-      <button type="submit" aria-label="Confirm reservation">
+      <button type="submit" aria-label="On Click confirm reservation">
         Reserve
       </button>
     </form>

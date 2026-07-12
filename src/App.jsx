@@ -1,38 +1,24 @@
-import { useState } from "react";
-import BookingForm from "./components/BookingForm.jsx";
-import ConfirmedBooking from "./components/ConfirmedBooking.jsx";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import BookingPage from "./pages/BookingPage.jsx";
+import ConfirmedBooking from "./pages/ConfirmedBooking.jsx";
 
+// App shell: shared Header/Footer landmarks around the routed pages.
 function App() {
-  const [confirmed, setConfirmed] = useState(null);
-
-  const submitBooking = (formData) => {
-    setConfirmed(formData);
-    return true;
-  };
-
   return (
-    <div className="app">
-      <header className="header">
-        <nav aria-label="Main navigation">
-          <a className="logo" href="/">
-            Little Lemon
-          </a>
-        </nav>
-      </header>
-
+    <>
+      <Header />
       <main className="main">
-        <h1>Reserve a Table</h1>
-        {confirmed ? (
-          <ConfirmedBooking booking={confirmed} />
-        ) : (
-          <BookingForm submitForm={submitBooking} />
-        )}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/confirmed" element={<ConfirmedBooking />} />
+        </Routes>
       </main>
-
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Little Lemon, Chicago.</p>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }
 
